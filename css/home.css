@@ -1,0 +1,38 @@
+@import 'styles.css';
+
+/*
+    Home page
+*/
+
+blockquote {
+    padding: 0.8rem;
+    clear: both;
+    background: var(--colorBgQuote);
+}
+blockquote > p:last-of-type {
+    margin-top: 0.5rem;
+    text-indent: 2rem;
+}
+
+@media only screen and (min-width: 720px) {
+    blockquote {
+        margin: 0.5rem 0 0 1rem;
+    }
+
+    img#home {
+        float: right; 
+        margin: 0 0 0.5rem 0.5rem;    
+        width: auto;
+    }
+}
+
+section#registration {
+    border: 0.15rem solid var(--colorBgNav);
+    border-radius: 0.5rem;
+    color: var(--colorBooking);
+    background-color: var(--colorBgArticle);
+    text-align: center;
+    font-weight: bold;
+    padding: 0.5rem 0;
+    margin: 1rem 0;
+}
