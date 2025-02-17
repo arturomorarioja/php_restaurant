@@ -1,41 +1,17 @@
 <?php
-    function sanitize(string $text): string {
-        return htmlspecialchars(trim($text));
-    }
 
-    $contactInfo = '';
-    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-        // If no page is specified, the homepage is shown
-        $page = $_GET['p'] ?? 'home';
-    } else {
-        $fullName = sanitize($_POST['full_name'] ?? '');
-        $phoneNo = sanitize($_POST['phone_no'] ?? '');
-        $email = sanitize($_POST['email'] ?? '');
-        $persons = sanitize($_POST['persons'] ?? 0);
-        $dateTime = sanitize($_POST['date_and_time'] ?? '');
-        $information = sanitize($_POST['further_information'] ?? '');
-        
-        if ($fullName === '' || $phoneNo === '' || $email === '' ||
-        $persons === 0 || $dateTime === '') {
-            $page = 'contact';
-        } else {            
-            $contactInfo =<<<INFO
-            --- REGISTRATION ---
-            Full name: $fullName
-            Phone no.: $phoneNo
-            Email: $email
-            Persons: $persons
-            Date/time: $dateTime
-            Further information: $information
-            INFO;
-            
-            $success = file_put_contents(
-                'registration/Contact Info ' . date('Y-m-d H-i-s') . '.txt', 
-                $contactInfo
-            );
-            $page = 'home';
-        }
-    }
+require_once 'src/registration.php';
+
+$registration = false;
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    // If no page is specified, the homepage is shown
+    $page = $_GET['p'] ?? 'home';
+} else {
+    $registration = true;
+    $success = registerContact($_POST);
+    $page = $success ? 'home' : 'contact';
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -67,7 +43,7 @@
         </ul>
     </nav>
     <main>
-        <?php if ($contactInfo !== ''): ?>
+        <?php if ($registration): ?>
             <section id="registration">                    
                 <?=($success ? 'Your contact information has been successfully registered' : 
                     'Unfortunately we could not register your information. Please call us by phone') ?>
@@ -75,14 +51,14 @@
         <?php endif; ?>
         <?php
             switch ($page) {
-                case 'menu': include_once('menu.htm'); break;
-                case 'contact': include_once('contact.htm'); break;
-                default: include_once('home.htm');
+                case 'menu': include_once 'views/menu.htm'; break;
+                case 'contact': include_once 'views/contact.htm'; break;
+                default: include_once 'views/home.htm';
             }
         ?>
     </main>
     <footer>
-        <p>&copy; 2024 KEA Development</p>
+        <p>&copy; 2025 KEA Development</p>
     </footer>
 </body>
 </html>

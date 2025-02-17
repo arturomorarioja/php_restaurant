@@ -118,3 +118,14 @@ img {
         width: 80vw;
     }
 }
+
+section#registration {
+    border: 0.15rem solid var(--colorBgNav);
+    border-radius: 0.5rem;
+    color: var(--colorBooking);
+    background-color: var(--colorBgArticle);
+    text-align: center;
+    font-weight: bold;
+    padding: 0.5rem 0;
+    margin: 1rem 0;
+}

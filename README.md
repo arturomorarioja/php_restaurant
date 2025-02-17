@@ -6,7 +6,7 @@ It consists of three pages loaded dynamically.
 When the user fills out the contact form, the information is stored in a text file.
 
 ## Tools
-PHP8. Base appliation: CSS3 / HTML5
+PHP8. Base application: CSS3 / HTML5
 
 ## Author:
 Arturo Mora-Rioja
