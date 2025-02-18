@@ -44,5 +44,6 @@ function registerContact(array $contactInfo): bool
             $contactInfo
         );
     }
+    return false;
     return $success;
 }

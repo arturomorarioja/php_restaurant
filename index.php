@@ -1,12 +1,12 @@
 <?php
 
-require_once 'src/registration.php';
-
 $registration = false;
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     // If no page is specified, the homepage is shown
     $page = $_GET['p'] ?? 'home';
 } else {
+    require_once 'src/registration.php';
+
     $registration = true;
     $success = registerContact($_POST);
     $page = $success ? 'home' : 'contact';
@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home | Restaurant KEA</title>
+    <title><?=($page === 'menu' ? 'Menu' : ($page === 'contact' ? 'Contact' : 'Home')) ?> | Restaurant KEA</title>
     <link rel="stylesheet" href="css/<?=$page ?>.css">
 </head>
 <body>
